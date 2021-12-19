@@ -3,7 +3,7 @@ package com.company;
 public interface Actor {
     String getName();
 
-    void jump();
+    int jump();
 
-    void run();
+    int run();
 }

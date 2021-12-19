@@ -1,12 +1,15 @@
 package com.company;
 
 public class Robot implements Actor {
-    public void jump() {
-        System.out.println(this.getName() + " jumping");
+    static int ABILITY_TO_JUMP = 0;
+    static int ABILITY_TO_RUN = 80;
+
+    public int jump() {
+        return ABILITY_TO_JUMP;
     }
 
-    public void run() {
-        System.out.println(this.getName() + " running");
+    public int run() {
+        return ABILITY_TO_RUN;
     }
 
     public String getName() {

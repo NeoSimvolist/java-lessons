@@ -1,11 +1,18 @@
 package com.company;
 
-public class Wall implements Test {
-    public String getName() {
+public class Wall extends Test {
+    @Override
+    String getName() {
         return "Wall";
     }
 
-    public void passTheTest(Actor actor) {
-        System.out.println("The " + this.getName() + " was successfully completed by a " + actor.getName());
+    @Override
+    int getHeight() {
+        return 20;
+    }
+
+    @Override
+    int getLength() {
+        return 0;
     }
 }

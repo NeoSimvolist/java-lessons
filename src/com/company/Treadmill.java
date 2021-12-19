@@ -1,12 +1,18 @@
 package com.company;
 
-public class Treadmill implements Test {
-
-    public String getName() {
+public class Treadmill extends Test {
+    @Override
+    String getName() {
         return "Treadmill";
     }
 
-    public void passTheTest(Actor actor) {
-        System.out.println("The " + this.getName() + " was successfully completed by a " + actor.getName());
+    @Override
+    int getHeight() {
+        return 0;
+    }
+
+    @Override
+    int getLength() {
+        return 40;
     }
 }

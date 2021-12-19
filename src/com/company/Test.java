@@ -1,7 +1,13 @@
 package com.company;
 
-public interface Test {
-    String getName();
+public abstract class Test {
+    abstract String getName();
 
-    void passTheTest(Actor actor);
+    abstract int getHeight();
+
+    abstract int getLength();
+
+    Boolean passTheTest(Actor actor) {
+        return actor.jump() >= this.getHeight() && actor.run() >= this.getLength();
+    }
 }
