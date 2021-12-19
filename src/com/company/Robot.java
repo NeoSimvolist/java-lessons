@@ -1,13 +1,13 @@
 package com.company;
 
-public class Robot {
+public class Robot implements Actor {
     public String name = "Robot";
 
-    void jump() {
+    public void jump() {
         System.out.println(this.name + " jumping");
     }
 
-    void run() {
+    public void run() {
         System.out.println(this.name + " running");
     }
 }

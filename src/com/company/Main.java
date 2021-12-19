@@ -3,16 +3,10 @@ package com.company;
 public class Main {
 
     public static void main(String[] args) {
-        Man man = new Man();
-        man.jump();
-        man.run();
-
-        Cat cat = new Cat();
-        cat.jump();
-        cat.run();
-
-        Robot robot = new Robot();
-        robot.jump();
-        robot.run();
+        Actor[] actors = {new Man(), new Cat(), new Robot()};
+        for (int index = 0; index < 3; index++) {
+            actors[index].run();
+            actors[index].jump();
+        }
     }
 }

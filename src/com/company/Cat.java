@@ -1,13 +1,13 @@
 package com.company;
 
-public class Cat {
+public class Cat implements Actor {
     public String name = "Cat";
 
-    void jump() {
+    public void jump() {
         System.out.println(this.name + " jumping");
     }
 
-    void run() {
+    public void run() {
         System.out.println(this.name + " running");
     }
 }
