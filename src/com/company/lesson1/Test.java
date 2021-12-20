@@ -1,4 +1,4 @@
-package com.company;
+package com.company.lesson1;
 
 public abstract class Test {
     abstract String getName();

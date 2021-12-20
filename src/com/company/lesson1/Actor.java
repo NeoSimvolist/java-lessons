@@ -1,4 +1,4 @@
-package com.company;
+package com.company.lesson1;
 
 public interface Actor {
     String getName();
