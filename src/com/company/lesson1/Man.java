@@ -1,8 +1,8 @@
-package com.company;
+package com.company.lesson1;
 
-public class Cat implements Actor {
-    static int ABILITY_TO_JUMP = 40;
-    static int ABILITY_TO_RUN = 20;
+public class Man implements Actor {
+    static int ABILITY_TO_JUMP = 20;
+    static int ABILITY_TO_RUN = 40;
 
     public int jump() {
         return ABILITY_TO_JUMP;
@@ -13,6 +13,6 @@ public class Cat implements Actor {
     }
 
     public String getName() {
-        return "Cat";
+        return "Man";
     }
 }

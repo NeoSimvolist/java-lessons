@@ -1,8 +1,8 @@
-package com.company;
+package com.company.lesson1;
 
 public class Wall extends Test {
     @Override
-    String getName() {
+    public String getName() {
         return "Wall";
     }
 
