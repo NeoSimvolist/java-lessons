@@ -2,7 +2,7 @@ package com.company.lesson1;
 
 public class Wall extends Test {
     @Override
-    public String getName() {
+    String getName() {
         return "Wall";
     }
 

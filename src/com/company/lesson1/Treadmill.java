@@ -2,7 +2,7 @@ package com.company.lesson1;
 
 public class Treadmill extends Test {
     @Override
-    public String getName() {
+    String getName() {
         return "Treadmill";
     }
 
