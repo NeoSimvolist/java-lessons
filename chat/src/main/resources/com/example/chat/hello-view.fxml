@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.chat.ChatController">
+   <top>
+      <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" text="Онлайн чат" BorderPane.alignment="CENTER" />
+   </top>
+   <center>
+      <TextArea fx:id="textArea" editable="false" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </center>
+   <bottom>
+      <HBox prefHeight="25.0" BorderPane.alignment="CENTER">
+         <TextField fx:id="textField" onAction="#sendMessage" HBox.hgrow="ALWAYS" />
+         <Button fx:id="sendButton" mnemonicParsing="false" onAction="#sendMessage" text="Отправить" />
+      </HBox>
+   </bottom>
+   <left>
+      <ListView fx:id="listView" prefWidth="150.0" BorderPane.alignment="CENTER" />
+   </left>
+</BorderPane>
