@@ -3,9 +3,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.chat.ChatController">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.company.lesson6.client.ClientController">
    <top>
-      <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" text="Онлайн чат" BorderPane.alignment="CENTER" />
+      <Label fx:id="caption" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" text="Онлайн чат" BorderPane.alignment="CENTER" />
    </top>
    <center>
       <TextArea fx:id="textArea" editable="false" prefWidth="200.0" BorderPane.alignment="CENTER" />
