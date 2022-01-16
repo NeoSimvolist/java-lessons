@@ -6,6 +6,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class ClientController {
 
@@ -29,6 +30,7 @@ public class ClientController {
      * Хук. Сработает после инициализации контроллера
      */
     public void initialize(Stage stage) {
+        this.listView.getSelectionModel().selectedItemProperty().addListener((observableValue, s, login) -> this.textField.setText("/w " + login + " "));
         this.network = new Network(HOST, PORT);
 
         try {
@@ -44,12 +46,11 @@ public class ClientController {
         // Регистрируем обработчик изменения статуса подключения
         network.onChangeConnectionStatus(isConnected -> Platform.runLater(() -> onChangeConnectionStatus(isConnected)));
         // Регистрируем обработчик получения сообщений от сервера
-        network.onReceiveMessage(message -> Platform.runLater(() -> appendMessage(message, "Сервер")));
+        network.onReceiveMessage(message -> Platform.runLater(() -> onReceiveMessage(message)));
     }
 
     public void sendMessage() {
         if (this.textField.getText().isEmpty()) return;
-        this.appendMessage(this.textField.getText(), "Я");
         try {
             this.network.sendMessage(this.textField.getText());
             this.textField.clear();
@@ -64,18 +65,28 @@ public class ClientController {
      * Обработчик изменения статуса подключения
      */
     private void onChangeConnectionStatus(boolean isConnected) {
+        this.listView.setDisable(!isConnected);
         this.textField.setDisable(!isConnected);
         this.sendButton.setDisable(!isConnected);
         this.caption.setText(isConnected ? "Онлайн чат: подключено" : "Онлайн чат: отключено");
-        this.listView.getItems().clear();
         if (isConnected) {
             this.textField.requestFocus();
-            this.listView.getItems().addAll("User 1", "User 2");
         }
     }
 
-    private void appendMessage(String message, String from) {
-        this.textArea.appendText(from + ": " + message);
+    private void onReceiveMessage(String message) {
+        // Обработка системного сообщения. Список пользователей онлайн
+        if (message.startsWith("/users")) {
+            this.listView.getItems().clear();
+            String[] parts = message.split(" ");
+            for (String part : parts) {
+                if (Objects.equals(part, "/users")) continue;
+                this.listView.getItems().add(part);
+            }
+            return;
+        }
+        // Отображаем сообщения полученные сервера
+        this.textArea.appendText(message);
         this.textArea.appendText(System.lineSeparator());
     }
 
