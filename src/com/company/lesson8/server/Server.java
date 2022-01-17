@@ -1,4 +1,4 @@
-package com.company.lesson6.server;
+package com.company.lesson8.server;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -9,6 +9,22 @@ import java.util.*;
 import java.util.function.Function;
 
 public class Server {
+
+    // Время за которое доджен авторизоваться клиент
+    public static final int KEEP_ALIVE_UNTIL_AUTH_MS = 120000;
+
+    public class Session {
+        private boolean isAuth;
+
+        synchronized public void setIsAuth(boolean value) {
+            this.isAuth = value;
+        }
+
+        synchronized public boolean getIsAuth() {
+            return this.isAuth;
+        }
+    }
+
     public final Map<String, Socket> users = new HashMap<>();
 
     private final int port;
@@ -23,7 +39,9 @@ public class Server {
             System.out.println("Сервер запущен, ожидаем подключения...");
             while (true) {
                 Socket socket = serverSocket.accept();
-                new Thread(() -> sessionHandler(socket)).start();
+                Session session = new Session();
+                new Thread(() -> sessionHandler(socket, session)).start();
+                new Thread(() -> closeNotAuthSessionHandler(socket, session)).start();
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -37,12 +55,13 @@ public class Server {
     /**
      * Обработчик сессий клиентов
      */
-    private void sessionHandler(Socket socket) {
+    private void sessionHandler(Socket socket, Session session) {
         System.out.println("Клиент подключился");
         String login = null;
         try {
             try {
                 login = this.authHandler(socket);
+                session.setIsAuth(true);
                 this.messagesHandler(login, socket);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -58,6 +77,26 @@ public class Server {
     }
 
     /**
+     * Обработчик закрывающий соединение с клиентом если пользователь не авторизовался за KEEP_ALIVE_UNTIL_AUTH
+     */
+    private void closeNotAuthSessionHandler(Socket socket, Session session) {
+        try {
+            Thread.sleep(KEEP_ALIVE_UNTIL_AUTH_MS);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        if (!session.getIsAuth()) {
+            try {
+                DataOutputStream outputStream = new DataOutputStream(socket.getOutputStream());
+                outputStream.writeUTF("Вы не авторизовались за " + (KEEP_ALIVE_UNTIL_AUTH_MS / 1000) + " сек. Соединение разорвано!");
+                socket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
      * Обработчик авторизации
      */
     private String authHandler(Socket socket) throws IOException {
@@ -65,7 +104,7 @@ public class Server {
         DataOutputStream outputStream = new DataOutputStream(socket.getOutputStream());
         String login;
         while (true) {
-            outputStream.writeUTF("Введите логин и пароль:");
+            outputStream.writeUTF("Отправьте логин и пароль (через пробел):");
             String message = inputStream.readUTF();
             String[] messageParts = message.split(" ");
             if (messageParts.length != 2) {

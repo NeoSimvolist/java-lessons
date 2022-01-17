@@ -1,4 +1,4 @@
-package com.company.lesson6.server;
+package com.company.lesson8.server;
 
 import java.util.HashMap;
 import java.util.Objects;

@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.company.lesson6.client.ClientController">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.company.lesson8.client.ClientController">
    <top>
       <Label fx:id="caption" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" text="Онлайн чат" BorderPane.alignment="CENTER" />
    </top>
