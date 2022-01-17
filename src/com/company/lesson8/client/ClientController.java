@@ -1,4 +1,4 @@
-package com.company.lesson6.client;
+package com.company.lesson8.client;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
